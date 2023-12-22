@@ -1,53 +1,87 @@
+
+​
+2,716 / 5,000
+Translation results
+Translation result
 ---
 sidebar_position: 1
 ---
 
 # Quick Start
 
-Let's discover **fp** command in less than 5 minutes.
+## Overview
 
-## Getting Started
+`fast-project` will help you with 3 main things:
+- **Initiate new projects** with built-in technologies.
+- **Integrate additional technologies** into a project under development in a simple way.
+- **Create files based on templates**, helping to develop quickly and synchronize project structure between members.
 
-### What you'll need
+Note: currently for project creation and technology integration, we only support projects using `nodejs`. Other platforms will be supported in the future.
 
-- [Node.js](https://nodejs.org/en/download/) version 12.0 or above
+## Setting
 
-- **fp** cli tool, available via install from npm 
+In this article I will give you some basic instructions to get acquainted with `fp`. To get started, you need to install this tool via npm:
+
 ```bash
 npm install -g @fast-project/cli
 ```
 
-### Prepare your project
+## Create a new project
 
-To save time, we recommend that you clone our examples repository to your local machine:
-
-```bash
-git clone git@github.com:fast-project/fast-project-examples.git
-```
-
-In this guide, we will use `node-express-app` example.
+Create a directory and initialize a new project using `node generator`:
 
 ```bash
-cd fast-project-examples/node-express-app
+fp init node -o my-project && cd my-project
 ```
 
-### Start generating files
+Use `node plugin` to create a NodeJS project structure:
+```bash
+fp use node
+```
 
-The `.templates` dir in the root of the `node-express-app` example is the template directory. It contains all the templates that will be used to generate files. 
-To start generating files, run the following command:
+Use `express plugin` for express integration:
+```bash
+fp use express
+```
+
+With the above simple steps you have successfully created a new nodeJs project with express. Now, you can use the `yarn dev` command to run the dev server like a normal project.
+
+> This project initialization process will create a `fast-project.json` file, which contains cli configuration information, generator and integrated plugins. If you no longer want to use `fp` in the future, you can delete this file from the project. Or, you can also use this file to initialize another project with similar configuration to the current project.
+
+## Generate files
+
+To quickly create an api, you can use the `fp use` command to create related files through the `express` plugin:
+
+**Example 1**: Create api `/books`
 
 ```bash
-fp gen --template .templates --config route=book --config view=book
+fp use express gen -c name=book
 ```
 
-Command above will generate 2 new files: `src/routes/book.js`, `src/views/book.js` and add the `book` route to the existing `src/app.js`.
+**Example 2**: Create api `/book-categories`
+```bash
+fp use express gen -c name=book-category
+```
 
-Run the following command to start the app:
+## Edit template
+
+Pre-built templates will certainly not be a perfect fit for your project, so in most cases you will need to edit these templates to fit your project's requirements. To do this, you can follow these steps:
+
+**Step 1**: Extract template
+You can extract and edit `express` plugin templates with the `fp extract` command:
 
 ```bash
-npm start
+fp extract express gen
 ```
 
-Then, open your browser and navigate to `http://localhost:3000/books` to see the result.
+**Step 2**: Edit template
 
-You can repeat the command `fp gen` with different `route` and `view` values to generate more files.
+These templates will be extracted in the `.templates/express/gen` folder. You can proceed to edit these files as desired. You can learn the syntax of handlebars [here](https://handlebarsjs.com/guide/).
+
+**Step 3**: Use the new template
+
+Use the `fp gen` command to create new files based on the edited template:
+
+```bash
+fp gen .templates/express/gen.js -c name=city
+```

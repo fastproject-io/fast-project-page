@@ -39,7 +39,7 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-article {
+main, aside {
   font-family: var(--ifm-font-family-base-origin);
 }
 
