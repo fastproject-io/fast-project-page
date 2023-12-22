@@ -1,8 +1,3 @@
-
-​
-2,716 / 5,000
-Translation results
-Translation result
 ---
 sidebar_position: 1
 ---

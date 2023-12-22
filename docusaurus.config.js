@@ -32,6 +32,14 @@ const config = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'vi'],
+    localeConfigs: {
+      en: {
+        label: 'en',
+      },
+      vi: {
+        label: 'vi',
+      },
+    },
   },
 
   presets: [
@@ -67,6 +75,10 @@ const config = {
             label: 'Docs',
           },
           {
+            type: 'localeDropdown',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/fastproject-io/fast-project',
             label: 'GitHub',
             position: 'right',
@@ -83,6 +95,10 @@ const config = {
         theme: prismThemes.vsLight,
         darkTheme: prismThemes.vsDark,
       },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+      }
     }),
 };
 
